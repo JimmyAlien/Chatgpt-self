@@ -16,24 +16,24 @@
     </div>
     <div class="chat-details">
         <div class="user-chatBox">
-            <img src="alien.png" alt="User image" width="50px">
+            <img src="alien.png" alt="User image">
             <div class="user-chatDetails">
                 <p>User</p>
             </div>
         </div>
         <div class="ai-chatBox">
-            <img src="chatgpt.png" alt="AI image" width="50px">
-            <box-icon name='loader-circle' animation='spin' ></box-icon>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
+            <box-icon name='loader-circle' animation='spin' id="loading"></box-icon>
             <div class="ai-chatDetails">
                 <p>AI</p>
-                <box-icon name='copy' type='solid'></box-icon>
+                <box-icon name='copy' type='solid' id="copy"></box-icon>
             </div>
         </div>
     </div>
     <div class="input">
         <div class="text-area">
             <textarea placeholder="Enter a prompt here" id="" class="incoming-text"></textarea>
-            <box-icon name='send' type='solid'></box-icon>
+            <box-icon name='send' type='solid' id="send"></box-icon>
         </div>
         <box-icon name='sun'id="theme"></box-icon>
         <box-icon name='trash'id="delete"></box-icon>

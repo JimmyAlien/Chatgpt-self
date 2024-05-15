@@ -1,21 +1,23 @@
-*{
+body{
     padding: 0;
     margin: 0;
     color: var(--text-color);
-    background: var(--ai-chatBox-bg);
+    background: var(--body-bg);
     font-size: 1.1rem;
 }
 :root{
+    --body-bg:  #343541;
     --text-color: #ffffff;
     --icon-color:#ACACBE;
     --icon-hover-bg: #5b5e71;
     --placeholder-color: #cccccc;
     --user-chatBox-bg: #343541;
-    --ai-chatBox-bg: #444654;
     --user-chatBox-border: #343541;
+    --ai-chatBox-bg: #444654;
     --ai-chatBox-border: #444654;
 }
 .light-mode{
+    --body-bg: #ffffff;
     --text-color: #343541;
     --icon-color:#a2a9bc;
     --icon-hover-bg: #f1f1f3;
@@ -25,33 +27,73 @@
     --user-chatBox-border: #ffffff;
     --ai-chatBox-border: #d9d9e3;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--body-bg);
+    border: 1px solid var(--ai-chatBox-border);
+    position: sticky;
+    top: 0;
+}
+button{
+    background: var(--body-bg);
+    color: var(--text-color);
+    width: auto;
+    height: auto;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px 30px;
+}
 .user-chatBox {
     display: flex;
     flex-direction: row;
-    padding:  15px 0;
+    padding:  10px 0;
+    background: var(--user-chatBox-bg);
+    border: var(--user-chatBox-border);
+    align-items: center;
 }
 .user-chatBox img{
-    padding-left: 3px;
+    padding-left: 30px;
     border-radius: 3px;
     width: 35px;
     height: 35px;
     object-fit: cover;
 }
-.user-chatDetails{
+.user-chatDetails {
     padding-left: 10px;
+
+    justify-content: center;
+    align-items: center;
 }
 .ai-chatBox{
     display: flex;
     flex-direction: row;
-    padding: 15px 0;
+    padding: 10px 0;
+    background: var(--ai-chatBox-bg);
+    border: var(--ai-chatBox-border);
+    align-items: center;
 }
 .ai-chatBox img{
     width: 35px;
     height: 35px;
     object-fit: cover;
-    padding-left: 3px;
+    padding-left: 30px;
 }
 #loading{
-    padding-left: 3px;
+    padding-left: 10px;
     color: var(--icon-color);
+
+}
+.ai-chatDetails p{
+    float: left;
+    padding: 0 10px;
+}
+
+.input{
+    width: 100%;
+    display: flex;
+    border: var(--ai-chatBox-border);
+    position: fixed;
+    bottom: 0;
+    align-items: center;
 }

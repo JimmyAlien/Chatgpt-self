@@ -82,18 +82,42 @@ button{
 #loading{
     padding-left: 10px;
     color: var(--icon-color);
-
+    display: inline-flex;
 }
 .ai-chatDetails p{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     float: left;
     padding: 0 10px;
 }
-
+#copy{
+    position: fixed;
+    right: 0;
+    cursor: pointer;
+    visibility: hidden;
+}
+.ai-chatBox:hover #copy{
+    visibility: visible;
+}
 .input{
     width: 100%;
     display: flex;
-    border: var(--ai-chatBox-border);
+    border: 1px solid var(--ai-chatBox-border);
     position: fixed;
     bottom: 0;
     align-items: center;
+    justify-content: center;
+}
+#text-area{
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+.incoming-text{
+    background: var(--user-chatBox-bg);
+    color: var(--text-color);
+    height: 55px;
+    display: flex;
+    justify-content: flex-start;
 }

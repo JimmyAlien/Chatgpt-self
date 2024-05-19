@@ -105,4 +105,31 @@ button{
     bottom: 0;
     padding: 20px 10px;
     border: 1px solid var(--ai-chatBox-bg);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.typing-area{
+    width: 100%;
+    display: flex;
+    max-width: 950px;
+    align-items: flex-end;
+    flex-direction: row;
+}
+.typing-area box-icon{
+    height: 55px;
+    width: 55px;
+    color: var(--icon-color);
+    display: flex;
+    
+}
+.text-area{
+    width: 100%;
+}
+.incoming-text{
+    width: 100%;
+    position: relative;
+}
+.text-controls{
+    display: flex;
 }

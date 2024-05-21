@@ -91,13 +91,13 @@ button{
     float: left;
     padding: 0 10px;
 }
-#copy{
+.ai-chatDetails i{
     position: fixed;
     right: 0;
     cursor: pointer;
     visibility: hidden;
 }
-.ai-chatBox:hover #copy{
+.ai-chatBox:hover .ai-chatDetails i{
     visibility: visible;
 }
 .typing-container{
@@ -105,5 +105,4 @@ button{
     bottom: 0;
     padding: 20px 10px;
     border: 1px solid var(--ai-chatBox-bg);
-    width: 100%;
 }

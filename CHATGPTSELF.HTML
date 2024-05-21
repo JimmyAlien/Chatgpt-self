@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatGPT-Clone</title>
     <link rel="stylesheet" href="CHATGPTSELF.CSS">
+    <script src="https://kit.fontawesome.com/0c49f2ba29.js" crossorigin="anonymous"></script>
     <script src="CHATGPTSELF.JS"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="shortcut icon" href="chatgpt.png" type="image/x-icon">
 </head>
 <body>
-    <div class="header">
-        <button id="sign-in">Sign in</button>
-        <button id="log-in">Log in</button>
-    </div>
     <div class="chat-details">
         <div class="user-chatBox">
             <img src="alien.png" alt="User image">
@@ -23,10 +20,10 @@
         </div>
         <div class="ai-chatBox">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
-            <box-icon name='loader-circle' animation='spin' id="loading"></box-icon>
+            <div id="loading"><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
             <div class="ai-chatDetails">
                 <p>AI</p>
-                <box-icon name='copy' type='solid' id="copy" style="color: white;"></box-icon>
+                <i id="copyBtn" class="fa-regular fa-copy"></i>
             </div>
         </div>
     </div>
@@ -34,11 +31,11 @@
         <div class="typing-area">
             <div class="text-area">
                 <textarea placeholder="Enter a prompt here" id="" class="incoming-text"></textarea>
-                <box-icon name='send' type='solid' id="send"></box-icon>
+                <span id="sendBtn" class="material-symbols-outlined">send</span>
             </div>
             <div class="text-controls">
-                <box-icon name='sun'id="theme"></box-icon>
-                <box-icon name='trash'id="delete"></box-icon>
+                <span id="themeBtn" class="material-symbols-outlined">light_mode</span>
+                <span id="deleteBtn" class="material-symbols-outlined">delete</span>
             </div>
         </div>
     </div>

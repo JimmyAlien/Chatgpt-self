@@ -1,9 +1,7 @@
-body{
-    padding: 0;
+*{
     margin: 0;
-    color: var(--text-color);
-    background: var(--body-bg);
-    font-size: 1.1rem;
+    padding: 0;
+    box-sizing: border-box;
 }
 :root{
     --body-bg:  #343541;
@@ -16,6 +14,14 @@ body{
     --ai-chatBox-bg: #444654;
     --ai-chatBox-border: #444654;
 }
+body{
+    background-color: var(--user-chatBox-bg);
+}
+.chat-details{
+    max-height: 100vh;
+    padding-bottom: 150px;
+    overflow-y: auto;
+}
 .light-mode{
     --body-bg: #ffffff;
     --text-color: #343541;
@@ -27,14 +33,6 @@ body{
     --user-chatBox-border: #ffffff;
     --ai-chatBox-border: #d9d9e3;
 }
-.header{
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--body-bg);
-    border: 1px solid var(--ai-chatBox-border);
-    position: sticky;
-    top: 0;
-}
 .user-chatBox {
     display: flex;
     flex-direction: row;
@@ -42,9 +40,9 @@ body{
     background: var(--user-chatBox-bg);
     border: var(--user-chatBox-border);
     align-items: center;
+    padding-left: 20px;
 }
 .user-chatBox img{
-    padding-left: 30px;
     border-radius: 3px;
     width: 35px;
     height: 35px;
@@ -52,7 +50,6 @@ body{
 }
 .user-chatDetails {
     padding-left: 10px;
-
     justify-content: center;
     align-items: center;
 }
@@ -63,12 +60,13 @@ body{
     background: var(--ai-chatBox-bg);
     border: var(--ai-chatBox-border);
     align-items: center;
+    padding-left: 20px;
 }
 .ai-chatBox img{
+    border-radius: 3px;
     width: 35px;
     height: 35px;
     object-fit: cover;
-    padding-left: 30px;
 }
 #loading{
     padding-left: 10px;
@@ -94,11 +92,10 @@ body{
 .typing-container{
     position: fixed;
     bottom: 0;
-    padding: 20px 10px;
-    border: 1px solid var(--ai-chatBox-bg);
-    background: var(--user-chatBox-bg);
     width: 100%;
-    float: right;
+    padding: 20px 10px;
+    background: var(--outgoing-chat-bg);
+    border: 1px solid var(--ai-chatBox-border);
     display: flex;
     justify-content: center;
 }
@@ -108,7 +105,7 @@ body{
     display: flex;
     align-items: flex-end;
 }
-.typing-area{
+.text-area{
     width: 100%;
     display: flex;
     position: relative;
@@ -126,20 +123,25 @@ body{
     padding: 15px 45px 15px 20px;
     height: 55px;
 }
+.incoming-text::placeholder{
+    color: var(--placeholder-color);
+}
 .text-area span{
     position: absolute;
     right: 0;
     bottom: 0;
     visibility: hidden;
 }
-.typing-area span{
+.text-area:valid ~ span{
+    visibility: visible;
+}
+.typing-content span{
     height: 55px;
     width: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--icon-color);
-    cursor: pointer;
 }
 .text-controls{
     display: flex;
@@ -148,4 +150,9 @@ body{
     background: var(--ai-chatBox-bg);
     margin-left: 7px;
     font-size: 1.4rem;
+    border: var(--ai-chatBox-border);
+    border-radius: 4px;
+}
+span.material-symbols-outlined{
+    cursor: pointer;
 }

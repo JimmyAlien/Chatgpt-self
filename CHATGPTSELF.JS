@@ -13,19 +13,15 @@ const createElement = (html , className) =>{
 }
 const sendText = () =>{
     userText = incomingText.value.trim();
-    if(userText.length > 0){
-        html = `<div class="user-chatBox">
-                    <img src="alien.png" alt="User image">
-                    <div class="user-chatDetails">
-                        <p></p>
-                    </div>
-                </div>`;
-        const incomingChatDiv = createElement(html , "incomingDiv");
-        document.querySelector("p").textContent = userText;
-        chatDetails.appendChild(incomingChatDiv);
-        setTimeout("loading" ,500);
-    }else{
-        alert("There is nothing in the prompt");
-    }
+    html = `<div class="user-chatBox">
+                <img src="alien.png" alt="User image">
+                <div class="user-chatDetails">
+                    <p></p>
+                </div>
+            </div>`;
+    const incomingChatDiv = createElement(html , "incomingDiv");
+    document.querySelector("p").textContent = userText;
+    chatDetails.appendChild(incomingChatDiv);
+    setTimeout("loading" ,500);
 }
 sendBtn.addEventListener("click" , sendText);

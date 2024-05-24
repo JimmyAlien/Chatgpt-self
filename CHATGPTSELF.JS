@@ -13,15 +13,33 @@ const createElement = (html , className) =>{
 }
 const sendText = () =>{
     userText = incomingText.value.trim();
-    html = `<div class="user-chatBox">
-                <img src="alien.png" alt="User image">
-                <div class="user-chatDetails">
-                    <p></p>
-                </div>
-            </div>`;
-    const incomingChatDiv = createElement(html , "incomingDiv");
-    document.querySelector("p").textContent = userText;
-    chatDetails.appendChild(incomingChatDiv);
-    setTimeout("loading" ,500);
+	incomingText.value = "";
+	incomingText.style.height = `${initialHeight}px`;
+    if(!userText) return;
+    const html= `<div class="chat-content">
+                    <div class="chat-details">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8InLowceGCu032bKzQyJpG-dKlBAeLfzJzg&s" alt="user-image">
+                        <p></p>
+                    </div>
+                </div>`; 
+    const incomingChatDiv = createElement(html,"incoming");
+    incomingChatDiv.querySelector("p").textContent = userText;
+    chatContainer.appendChild(incomingChatDiv);
+	document.querySelector(".default-text")?.remove();
+    setTimeout(loading,500);
+	chatContainer.scrollTo(0 , chatContainer.scrollHeight);
+}
+const loading = () =>{
+    const html = `<div class="ai-chatBox">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
+                    <div id="loading"><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
+                    <div class="ai-chatDetails">
+                        <p>AI</p>
+                        <i id="copyBtn" class="fa-regular fa-copy"></i>
+                    </div>
+                </div>`;
+    const outgoingChatDiv = createElement(html , "outgoing");
+    chatContainer.appendChild(outgoingChatDiv);
+    chatContainer.scrollTo(0 , chatContainer.scrollHeight);
 }
 sendBtn.addEventListener("click" , sendText);

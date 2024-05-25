@@ -33,7 +33,7 @@ body{
     --user-chatBox-border: #ffffff;
     --ai-chatBox-border: #d9d9e3;
 }
-.user-chatBox {
+.user-chatBox .chat{
     display: flex;
     flex-direction: row;
     padding:  10px 0;
@@ -110,6 +110,16 @@ body{
     display: flex;
     position: relative;
 }
+:where(.typing-container textarea)::-webkit-scrollbar{
+    width: 6px;
+}
+:where(.typing-container textarea)::-webkit-scrollbar-track{
+    background: var(--ai-chatBox-bg);
+    border-radius: 25px;
+}
+:where(.typing-container textarea)::-webkit-scrollbar-thumb{
+    background-color: var(--text-color);
+}
 .incoming-text{
     width: 100%;
     background: var(--user-chatBox-bg);
@@ -132,7 +142,7 @@ body{
     bottom: 0;
     visibility: hidden;
 }
-.text-area:valid ~ span{
+.text-area textarea:valid ~ span{
     visibility: visible;
 }
 .typing-content span{

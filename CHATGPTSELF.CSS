@@ -42,18 +42,18 @@ body{
     align-items: center;
     padding-left: 20px;
 }
-.user-chatBox img{
+.chat .user-chatBox img{
     border-radius: 3px;
     width: 35px;
     height: 35px;
     object-fit: cover;
 }
-.user-chatDetails {
+.user-chatDetails .chat.incoming{
     padding-left: 10px;
     justify-content: center;
     align-items: center;
 }
-.ai-chatBox{
+.ai-chatBox .chat{
     display: flex;
     flex-direction: row;
     padding: 10px 0;
@@ -62,7 +62,7 @@ body{
     align-items: center;
     padding-left: 20px;
 }
-.ai-chatBox img{
+.chat .ai-chatBox img{
     border-radius: 3px;
     width: 35px;
     height: 35px;

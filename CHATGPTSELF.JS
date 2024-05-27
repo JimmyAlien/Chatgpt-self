@@ -4,7 +4,6 @@ const incomingText = document.querySelector(".incoming-text");
 const sendBtn = document.querySelector("#sendBtn");
 const themeBtn = document.querySelector("#themeBtn");
 const deleteBtn = document.querySelector("#deleteBtn");
-const copyBtn = document.querySelector("#copyBtn");
 const chatDetails = document.querySelector(".chat-details");
 //const initialHeight = incomingText.scrollHeight;
 const userText = null;
@@ -15,6 +14,24 @@ const createElement = (html , className) =>{
     div.innerHTML = html;
     return div;
 }
+const sendText = () =>{
+    const html = `<div class="ai-chatBox">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
+                    <div id="loading"><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
+                    <div class="ai-chatDetails">
+                        <p>AI</p>
+                        <i id="copyBtn" class="fa-regular fa-copy" onclick="copyText(this)"></i>
+                    </div>
+                </div>`;
+    const AIchatDiv = createElement(html , "AI");
+    chatDetails.appendChild(AIchatDiv);
+}
+const copyText = (copyBtn) =>{
+    const copiedText = document.querySelector(".ai-chatDetails i");
+    navigator.clipboard.writeText(copiedText.textContent);
+    copiedText.textContent = "done";
+    setTimeout(() => copyBtn.textContent = "fa-regular fa-copy" , 1000);
+}
 //Receives the input and shows what the user has prompt.
 const receiveText = () =>{
     const userText = userInput.value.trim();
@@ -22,48 +39,17 @@ const receiveText = () =>{
     if(!userText) return;
 	userInput.value = "";
 	//userInput.style.height = `${initialHeight}px`;
-    const html= `<div class="chat-content">
-                    <div class="chat-details">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8InLowceGCu032bKzQyJpG-dKlBAeLfzJzg&s" alt="user-image">
-                        <p></p>
+    const html= `<div class="user-chatBox">
+                    <img src="alien.png" alt="User image">
+                    <div class="user-chatDetails">
+                        <p>User</p>
                     </div>
                 </div>`; 
-    const incomingChatDiv = createElement(html,"incoming");
-    incomingChatDiv.querySelector("p").textContent = userText;
-    chatDetails.appendChild(incomingChatDiv);
+    const userchatDiv = createElement(html , "user");
+    userchatDiv.querySelector("p").textContent = userText;
+    chatDetails.appendChild(userchatDiv);
 	//document.querySelector(".default-text")?.remove();
-    // setTimeout(loading,500);
+    setTimeout(sendText,300);
 	// chatDetails.scrollTo(0 , chatDetails.scrollHeight);
 }
-// const sendText = () =>{
-//     userText = chatInput.value.trim();
-// 	chatInput.value = "";
-// 	chatInput.style.height = `${initialHeight}px`;
-//     if(!userText) return;
-//     const html= `<div class="chat-content">
-//                     <div class="chat-details">
-//                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8InLowceGCu032bKzQyJpG-dKlBAeLfzJzg&s" alt="user-image">
-//                         <p></p>
-//                     </div>
-//                 </div>`; 
-//     const outgoingChatDiv = createElement(html,"outgoing");
-//     outgoingChatDiv.querySelector("p").textContent = userText;
-//     chatContainer.appendChild(outgoingChatDiv);
-// 	document.querySelector(".default-text")?.remove();
-//     setTimeout(showTypingAnimation,500);
-// 	chatContainer.scrollTo(0 , chatContainer.scrollHeight);
-// }
-// const loading = () =>{
-//     const html = `<div class="ai-chatBox">
-//                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
-//                     <div id="loading"><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
-//                     <div class="ai-chatDetails">
-//                         <p>AI</p>
-//                         <i id="copyBtn" class="fa-regular fa-copy"></i>
-//                     </div>
-//                 </div>`;
-//     const outgoingChatDiv = createElement(html , "outgoing");
-//     chatDetails.appendChild(outgoingChatDiv);
-//     chatDetails.scrollTo(0 , chatDetails.scrollHeight);
-// }
 sendBtn.addEventListener("click" , receiveText);

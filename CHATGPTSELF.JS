@@ -7,6 +7,17 @@ const deleteBtn = document.querySelector("#deleteBtn");
 const chatDetails = document.querySelector(".chat-details");
 //const initialHeight = incomingText.scrollHeight;
 const userText = null;
+const loadWebStorage = () =>{
+    const themeColor = localStorage.getItem("theme-color");
+    themeBtn = document.body.classList.toggle("dark-mode" , themeColor === "dark-mode");
+    document.body.classList.contains("light-mode") ? "dark-mode" : "light-mode";
+    const defaultText = `<div class="default-chat">
+                            <h1>Chat GPT</h1>
+                            <p>Feel the power of Artificial intelligence</p>
+                        </div>`;
+    chatDetails.innerHTML = loadStorage.getItem("all-charts") || defaultText;
+}
+loadWebStorage();
 //The div is created.
 const createElement = (html , className) =>{
     const div = document.createElement("div");
@@ -27,15 +38,19 @@ const sendText = () =>{
     chatDetails.appendChild(AIchatDiv);
 }
 const copyText = (copyBtn) =>{
-    const copiedText = document.querySelector(".ai-chatDetails i");
+    const copiedText = document.querySelector(".ai-chatDetails p");
     navigator.clipboard.writeText(copiedText.textContent);
-    copiedText.textContent = "done";
-    setTimeout(() => copyBtn.textContent = "fa-regular fa-copy" , 1000);
+    copyBtn.classList.toggle("fa-solid");
+    copyBtn.classList.toggle("fa-check");
+    setTimeout(changeClasses , 1000);
+}
+const changeClasses = () =>{
+    copyBtn.classList.toggle("fa-copy");
+    copyBtn.classList.toggle("fa-solid");
 }
 //Receives the input and shows what the user has prompt.
 const receiveText = () =>{
     const userText = userInput.value.trim();
-    console.log(userText);
     if(!userText) return;
 	userInput.value = "";
 	//userInput.style.height = `${initialHeight}px`;
@@ -52,4 +67,13 @@ const receiveText = () =>{
     setTimeout(sendText,300);
 	// chatDetails.scrollTo(0 , chatDetails.scrollHeight);
 }
+const changeTheme = () =>{
+    document.body.classList.toggle("light-mode");
+    themeBtn = document.body.classList.contains("dark-mode") ? "light-mode" : "dark-mode";
+}
+const deleteAction = () =>{
+
+}
 sendBtn.addEventListener("click" , receiveText);
+themeBtn.addEventListener("click" , changeTheme);
+deleteBtn.addEventListener("click" , deleteAction);

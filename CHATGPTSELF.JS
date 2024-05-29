@@ -7,17 +7,17 @@ const deleteBtn = document.querySelector("#deleteBtn");
 const chatDetails = document.querySelector(".chat-details");
 //const initialHeight = incomingText.scrollHeight;
 const userText = null;
-const loadWebStorage = () =>{
+const loadLocalStorage = () =>{
     const themeColor = localStorage.getItem("theme-color");
-    themeBtn = document.body.classList.toggle("dark-mode" , themeColor === "dark-mode");
-    document.body.classList.contains("light-mode") ? "dark-mode" : "light-mode";
+    document.body.classList.toggle("light-mode" , themeColor === "light_mode");
+    document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
     const defaultText = `<div class="default-chat">
                             <h1>Chat GPT</h1>
                             <p>Feel the power of Artificial intelligence</p>
                         </div>`;
-    chatDetails.innerHTML = loadStorage.getItem("all-charts") || defaultText;
+    //chatDetails.innerHTML = localStorage.getItem("all-chats") || defaultText;
 }
-loadWebStorage();
+loadLocalStorage();
 //The div is created.
 const createElement = (html , className) =>{
     const div = document.createElement("div");
@@ -36,15 +36,16 @@ const sendText = () =>{
                 </div>`;
     const AIchatDiv = createElement(html , "AI");
     chatDetails.appendChild(AIchatDiv);
+    localStorage.setItem("all-chats" , chatDetails.innerHTML);
 }
 const copyText = (copyBtn) =>{
     const copiedText = document.querySelector(".ai-chatDetails p");
     navigator.clipboard.writeText(copiedText.textContent);
     copyBtn.classList.toggle("fa-solid");
     copyBtn.classList.toggle("fa-check");
-    setTimeout(changeClasses , 1000);
+    setTimeout(changeCopyClasses , 1000);
 }
-const changeClasses = () =>{
+const changeCopyClasses = () =>{
     copyBtn.classList.toggle("fa-copy");
     copyBtn.classList.toggle("fa-solid");
 }
@@ -60,16 +61,17 @@ const receiveText = () =>{
                         <p>User</p>
                     </div>
                 </div>`; 
-    const userchatDiv = createElement(html , "user");
-    userchatDiv.querySelector("p").textContent = userText;
-    chatDetails.appendChild(userchatDiv);
+    const userChat = createElement(html , "user");
+    userChat.querySelector("p").textContent = userText;
+    chatDetails.appendChild(userChat);
 	//document.querySelector(".default-text")?.remove();
     setTimeout(sendText,300);
 	// chatDetails.scrollTo(0 , chatDetails.scrollHeight);
 }
 const changeTheme = () =>{
     document.body.classList.toggle("light-mode");
-    themeBtn = document.body.classList.contains("dark-mode") ? "light-mode" : "dark-mode";
+    localStorage.setItem("theme-color" , themeBtn.innerHTML)
+    themeBtn.innerHTML = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 }
 const deleteAction = () =>{
 

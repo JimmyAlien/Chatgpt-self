@@ -15,7 +15,7 @@ const loadLocalStorage = () =>{
                             <h1>Chat GPT</h1>
                             <p>Feel the power of Artificial intelligence</p>
                         </div>`;
-    //chatDetails.innerHTML = localStorage.getItem("all-chats") || defaultText;
+    chatDetails.innerHTML = localStorage.getItem("all-chats") || defaultText;
 }
 loadLocalStorage();
 //The div is created.
@@ -64,9 +64,9 @@ const receiveText = () =>{
     const userChat = createElement(html , "user");
     userChat.querySelector("p").textContent = userText;
     chatDetails.appendChild(userChat);
-	//document.querySelector(".default-text")?.remove();
+	document.querySelector(".default-chat")?.remove();
     setTimeout(sendText,300);
-	// chatDetails.scrollTo(0 , chatDetails.scrollHeight);
+	chatDetails.scrollTo(0 , chatDetails.scrollHeight);
 }
 const changeTheme = () =>{
     document.body.classList.toggle("light-mode");
@@ -74,7 +74,10 @@ const changeTheme = () =>{
     themeBtn.innerHTML = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 }
 const deleteAction = () =>{
-
+    if(confirm("Are you sure you want to delete the chats?")){
+        localStorage.removeItem("all-chats");
+        loadLocalStorage();
+    }
 }
 sendBtn.addEventListener("click" , receiveText);
 themeBtn.addEventListener("click" , changeTheme);

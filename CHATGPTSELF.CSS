@@ -18,6 +18,14 @@ body{
     background-color: var(--user-chatBox-bg);
     color: var(--text-color);
 }
+.default-chat{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .chat-details {
     max-height: 100vh;
     padding-bottom: 150px;

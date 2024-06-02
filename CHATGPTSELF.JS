@@ -13,7 +13,8 @@ const loadLocalStorage = () =>{
     document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
     const defaultText = `<div class="default-chat">
                             <h1>Chat GPT</h1>
-                            <p>Feel the power of Artificial intelligence</p>
+                            <p>Feel the power of Artificial intelligence.</p>
+                            <p>We only have 10 request a day.</p>
                         </div>`;
     chatDetails.innerHTML = localStorage.getItem("all-chats") || defaultText;
     chatDetails.scrollTo(0 , chatDetails.scrollHeight);
@@ -28,6 +29,7 @@ const createElement = (html , className) =>{
 }
 const getAIresponse = async() =>{
     const url = 'https://chatgpt-api8.p.rapidapi.com/';
+    const pElement = document.createElement("p");
     const options = {
         method: 'POST',
         headers: {
@@ -37,32 +39,38 @@ const getAIresponse = async() =>{
         },
         body: {
             '0': {
-                content: 'who won the super bowl 2019?',
+                content: 'Hello! I\'m an AI assistant bot based on ChatGPT 3. How may I help you?',
+                role: 'system'
+            },
+            '1': {
+                content: userText,
                 role: 'user'
             }
         }
     };
-
     try {
         const response = await fetch(url, options);
-        const result = await response.text();
+        const result = await response.json();
         console.log(result);
+        pElement.textContent = result.choices[0].content.trim();
     } catch (error) {
         console.error(error);
     }
+    AIchatDiv.querySelector("#loading").remove();
+    AIchatDiv.querySelector(".ai-chatDetails").appendChild(pElement);
+    localStorage.setItem("all-chats" , chatDetails.innerHTML);
 }
 const sendText = () =>{
     const html = `<div class="ai-chatBox">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
                     <div id="loading"><i class="fa-solid fa-spinner fa-spin-pulse"></i></div>
                     <div class="ai-chatDetails">
-                        <p>AI</p>
+                        <p></p>
                         <i id="copyBtn" class="fa-regular fa-copy" onclick="copyText(this)"></i>
                     </div>
                 </div>`;
     const AIchatDiv = createElement(html , "AI");
     chatDetails.appendChild(AIchatDiv);
-    localStorage.setItem("all-chats" , chatDetails.innerHTML);
     getAIresponse(AIchatDiv);
 }
 const copyText = (copyBtn) =>{

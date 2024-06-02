@@ -23,6 +23,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 70vh;
 }
 .chat-details {
     max-height: 100vh;
@@ -94,7 +95,7 @@ body{
     cursor: pointer;
     visibility: hidden;
 }
-.ai-chatBox:hover .ai-chatDetails i{
+.ai-chatBox:hover .ai-chatDetails:not(:has(#loading)) i{
     visibility: visible;
 }
 .typing-container{

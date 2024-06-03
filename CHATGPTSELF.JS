@@ -37,28 +37,29 @@ const getAIresponse = async() =>{
             'x-rapidapi-host': 'chatgpt-api8.p.rapidapi.com',
             'Content-Type': 'application/json'
         },
-        body: {
+        //BUG:The API is not work and append it on the sendText p.
+        body: JSON.stringify({
             '0': {
                 content: 'Hello! I\'m an AI assistant bot based on ChatGPT 3. How may I help you?',
                 role: 'system'
             },
             '1': {
-                content: userText,
+                content: userInput,
                 role: 'user'
             }
-        }
+        })
     };
     try {
         const response = await fetch(url, options);
         const result = await response.json();
         console.log(result);
-        pElement.textContent = result.choices[0].content.trim();
+        //pElement.textContent = result.body[0].content.trim();
     } catch (error) {
         console.error(error);
     }
-    AIchatDiv.querySelector("#loading").remove();
-    AIchatDiv.querySelector(".ai-chatDetails").appendChild(pElement);
-    localStorage.setItem("all-chats" , chatDetails.innerHTML);
+    // AIchatDiv.querySelector("#loading").remove();
+    // AIchatDiv.querySelector(".ai-chatDetails").appendChild(pElement);
+    // localStorage.setItem("all-chats" , chatDetails.innerHTML);
 }
 const sendText = () =>{
     const html = `<div class="ai-chatBox">

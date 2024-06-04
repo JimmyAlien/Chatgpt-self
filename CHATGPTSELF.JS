@@ -27,39 +27,48 @@ const createElement = (html , className) =>{
     div.innerHTML = html;
     return div;
 }
-const getAIresponse = async() =>{
-    const url = 'https://chatgpt-api8.p.rapidapi.com/';
-    const pElement = document.createElement("p");
+const url = 'https://chatgpt-42.p.rapidapi.com/geminipro';
+const getAIresponse = async(AIchatDiv , userText) =>{
+    const AiText = document.createElement("p");
     const options = {
         method: 'POST',
         headers: {
             'x-rapidapi-key': '47854af86bmshea792a2ed2a75c2p1e50bejsn4ef229c5a5d4',
-            'x-rapidapi-host': 'chatgpt-api8.p.rapidapi.com',
+            'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
             'Content-Type': 'application/json'
         },
-        //BUG:The API is not work and append it on the sendText p.
         body: JSON.stringify({
-            '0': {
-                content: 'Hello! I\'m an AI assistant bot based on ChatGPT 3. How may I help you?',
-                role: 'system'
-            },
-            '1': {
-                content: userInput,
-                role: 'user'
-            }
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'user',
+                    content: userText
+                }
+            ],
+            temperature: 0.9,
+            top_k: 5,
+            top_p: 0.9,
+            max_tokens: 256,
+            web_access: false
         })
     };
     try {
         const response = await fetch(url, options);
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            console.error(`Error: ${response.status} - ${errorMessage}`);
+            return;
+        }
         const result = await response.json();
         console.log(result);
-        //pElement.textContent = result.body[0].content.trim();
+        console.log(userText);
+        //AiText.textContent = result.choices[0].message.content.trim();
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
-    // AIchatDiv.querySelector("#loading").remove();
-    // AIchatDiv.querySelector(".ai-chatDetails").appendChild(pElement);
-    // localStorage.setItem("all-chats" , chatDetails.innerHTML);
+    AIchatDiv.querySelector("#loading").remove();
+    AIchatDiv.querySelector(".ai-chatDetails").appendChild(AiText);
+    localStorage.setItem("all-chats" , chatDetails.innerHTML);
 }
 const sendText = () =>{
     const html = `<div class="ai-chatBox">

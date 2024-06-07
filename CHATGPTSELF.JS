@@ -1,11 +1,11 @@
+//TODO:Launch this website
 //Variables that are used.
-const userInput = document.querySelector(".incoming-text");
 const incomingText = document.querySelector(".incoming-text");
 const sendBtn = document.querySelector("#sendBtn");
 const themeBtn = document.querySelector("#themeBtn");
 const deleteBtn = document.querySelector("#deleteBtn");
 const chatDetails = document.querySelector(".chat-details");
-const textboxHeight = userInput.scrollHeight;
+const textboxHeight = incomingText.scrollHeight;
 const userText = null;
 const loadLocalStorage = () =>{
     const themeColor = localStorage.getItem("theme-color");
@@ -27,9 +27,10 @@ const createElement = (html , className) =>{
     div.innerHTML = html;
     return div;
 }
-const url = 'https://chatgpt-42.p.rapidapi.com/geminipro';
-const getAIresponse = async(AIchatDiv , userText) =>{
+const getAIresponse = async(AIchatDiv , incomingText) =>{
+    const url = 'https://chatgpt-42.p.rapidapi.com/geminipro';
     const AiText = document.createElement("p");
+    console.log(userText);
     const options = {
         method: 'POST',
         headers: {
@@ -38,38 +39,32 @@ const getAIresponse = async(AIchatDiv , userText) =>{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
             messages: [
                 {
                     role: 'user',
-                    content: userText
+                    content: 'How can I be rich'
                 }
-            ],
-            temperature: 0.9,
-            top_k: 5,
-            top_p: 0.9,
-            max_tokens: 256,
-            web_access: false
+            ]
         })
     };
-    try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            console.error(`Error: ${response.status} - ${errorMessage}`);
-            return;
-        }
-        const result = await response.json();
-        console.log(result);
-        console.log(userText);
-        //AiText.textContent = result.choices[0].message.content.trim();
-    } catch (error) {
-        console.log(error);
+    // try {
+    //     const response = await fetch(url, options);
+    //     const result = await response.json();
+    //     console.log(result);
+    //     errorText = `<p class= "errorText">Error ,no response</p>`
+    //     if(result == null){
+    //         AiText.textContent = errorText;
+    //     }
+    //     else{
+    //         AiText.textContent = result.result;
+    //     }
+    //     } catch (error) {
+    //         console.log(error);
+    // }
+    //AIchatDiv.querySelector("#loading").remove();
+    // AIchatDiv.querySelector(".ai-chatDetails").appendChild(AiText);
+    // localStorage.setItem("all-chats" , chatDetails.innerHTML);
     }
-    AIchatDiv.querySelector("#loading").remove();
-    AIchatDiv.querySelector(".ai-chatDetails").appendChild(AiText);
-    localStorage.setItem("all-chats" , chatDetails.innerHTML);
-}
 const sendText = () =>{
     const html = `<div class="ai-chatBox">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJv905e-_7-8r42Evr7jtZ65DqT78z8flXZA&s" alt="AI image">
@@ -83,27 +78,28 @@ const sendText = () =>{
     chatDetails.appendChild(AIchatDiv);
     getAIresponse(AIchatDiv);
 }
-const copyText = (copyBtn) =>{
-    const copiedText = document.querySelector(".ai-chatDetails p");
-    navigator.clipboard.writeText(copiedText.textContent);
-    copyBtn.classList.toggle("fa-solid");
-    copyBtn.classList.toggle("fa-check");
-    setTimeout(changeCopyClasses , 1000);
+    const copyText = (copyBtn) =>{
+        const copiedText = document.querySelector(".ai-chatDetails p");
+        navigator.clipboard.writeText(copiedText.textContent);
+        copyBtn.classList.toggle("fa-solid");
+        copyBtn.classList.toggle("fa-check");
+        setTimeout(changeCopyClasses , 1000);
 }
+//BUG:ncaught TypeError: Cannot read properties of undefined (reading 'toggle') at changeCopyClasses (CHATGPTSELF.JS:91:23) 
 const changeCopyClasses = () =>{
     copyBtn.classList.toggle("fa-copy");
     copyBtn.classList.toggle("fa-solid");
-}
+    }
 //Receives the input and shows what the user has prompt.
 const receiveText = () =>{
-    const userText = userInput.value.trim();
+    const incomingText = userInput.value.trim();
     incomingText.value = "";
     incomingText.style.height = `${textboxHeight}px`
     if(!userText) return;
 	userInput.value = "";
     const html= `<div class="user-chatBox">
                     <img src="alien.png" alt="User image">
-                    <div class="user-chatDetails">
+                     <div class="user-chatDetails">
                         <p></p>
                     </div>
                 </div>`; 
@@ -113,6 +109,7 @@ const receiveText = () =>{
 	document.querySelector(".default-chat")?.remove();
     setTimeout(sendText,300);
 	chatDetails.scrollTo(0 , chatDetails.scrollHeight);
+    getAIresponse(userText);
 }
 const changeTheme = () =>{
     document.body.classList.toggle("light-mode");
@@ -125,11 +122,11 @@ const deleteAction = () =>{
         loadLocalStorage();
     }
 }
-userInput.addEventListener("input" , ()=>{
+incomingText.addEventListener("input" , ()=>{
     incomingText.style.height = `${textboxHeight}px`;
-    incomingText.style.height =  `${userInput.scrollHeight}px`;
+    incomingText.style.height =  `${incomingText.scrollHeight}px`;
 });
-userInput.addEventListener("keydown" , (e) =>{
+incomingText.addEventListener("keydown" , (e) =>{
     if(e.key === "Enter" && !e.shiftKey){
         e.preventDefault();
         receiveText();

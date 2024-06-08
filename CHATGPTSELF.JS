@@ -92,9 +92,8 @@ const changeCopyClasses = () =>{
     }
 //Receives the input and shows what the user has prompt.
 const receiveText = () =>{
-    const incomingText = userInput.value.trim();
-    incomingText.value = "";
-    incomingText.style.height = `${textboxHeight}px`
+    const userText = incomingText.value.trim();
+    userText.style.height = `${textboxHeight}px`
     if(!userText) return;
 	userInput.value = "";
     const html= `<div class="user-chatBox">

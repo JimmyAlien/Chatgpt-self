@@ -82,7 +82,6 @@ const changeCopyClasses = () =>{
     copyBtn.classList.toggle("fa-copy");
     copyBtn.classList.toggle("fa-solid");
 }
-//BUG:ncaught TypeError: Cannot read properties of undefined (reading 'toggle') at changeCopyClasses (CHATGPTSELF.JS:91:23) 
 //Receives the input and shows what the user has prompt.
 const receiveText = () =>{
     const userText = incomingText.value.trim();
